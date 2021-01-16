@@ -1,4 +1,3 @@
 deployment link :
-https://gucstaffportal.herokuapp.com/
-
+https://staffportalguc.herokuapp.com/
 ProjectWS is the modified backend 
