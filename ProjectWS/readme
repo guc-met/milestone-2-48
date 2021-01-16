@@ -1,0 +1,836 @@
+•	Functionality: User log in 
+Route: /login
+Request type: POST
+Request body: {
+ "email":"String", "password":"1234"
+}
+
+Parameters: nothing
+Example of how to call the route: /login
+Response: if login  successful  
+"token": “Token",
+    "user": {
+        "id": “id number”,
+        "email": "Email"
+    }
+
+•	Functionality: View Profile
+Route: /ViewProfile
+Request type: GET
+Parameters: user id as “ac-1” or “hr-1”
+Example of how to call the route: /ViewProfile/ac-12
+Response: All info about user 
+{
+    "password": "$2b$10$94co2cLp6Vo2AkxwLAW8f.ac0z4U.zcbPcy3vrlbnkSKxm.bH26SS",
+    "courses": [
+        "math203",
+        "csen404"
+    ],
+    "_id": 48,
+    "Name": "new",
+    "email": "min33",
+    "salary": 12344,
+    "OfficeLocation": "c8.455",
+    "annualleavebalance": 0,
+    "accidentalleavebalance": 0,
+    "department": "iet",
+    "gender": "female",
+    "schedule": [
+        {
+            "day_slot": "monday5th",
+            "course": "math203"
+        },
+        {
+            "day_slot": "monday2nd",
+            "course": "math2044"
+        }
+    ],
+    "__v": 0
+}
+
+•	Functionality:Reset Password
+Route: /ResetPassword
+Request type:POST
+Request body: {
+ "newpassword":"NEW", "oldpassword":"123456"
+}
+
+Parameters: User id “ac-1” or “hr-1”
+Example of how to call the route: /ResetPassword/ac-48
+
+Response: if old password matches then
+"updated"
+•	Functionality:User Sign in
+Route: /SignIn
+Request type:POST
+Parameters: User id “ac-1” or “hr-1”
+Example of how to call the route: /Signin/ac-25
+Response: if sign in was successful “Signed in successfully”
+(Sign in is successful if this was the first sign in in the day or the previous sign in already had a sign out)
+•	Functionality:User Sign in
+Route: /SignOut
+Request type:POST
+Parameters: User id “ac-1” or “hr-1”
+Example of how to call the route: /SignOut/ac-25
+Response: if sign in was successful "Sign Out Successful"
+(Sign out is successful if there was a sign in on this day before it )
+
+
+
+
+
+
+
+
+•	Functionality: View Attendance
+Route: /ViewAttendance
+Request type:GET
+Parameters: User id “ac-1” or “hr-1”
+Example of how to call the route: /ViewAttendance/ac-25
+Response: [
+    {
+        "_id": "5fe6052a19e66c1b4c302660",
+        "member_id": "ac-25",
+        "Days": [
+            {
+                "Signin": "Signed in",
+                "SignOut": "Signed Out",
+                "MinutesSpent": 0
+                "_id": "5fe6052a19e66c1b4c302661",
+                "day": 25,
+                "dayname": 5,
+                "month": 11,
+                "year": 2020,
+                "fulldate": "2020-12-25T20:31:36.820Z"
+            }
+        ],
+        "__v": 0
+    },
+    {
+        "_id": "5fe60aac89b46532e0ccafba",
+        "member_id": "ac-25",
+        "Days": [
+            {
+                "Signin": "Signed in",
+                "SignOut": "Signed Out",
+                "MinutesSpent": 0,
+                "_id": "5fe60aac89b46532e0ccafbb",
+                "day": 25,
+                "dayname": 3,
+                "month": 11,
+                "year": 2020,
+                "fulldate": "2020-12-25T20:31:36.821Z"
+            }
+        ],
+        "__v": 0
+    }]
+
+
+
+
+
+•	Functionality:View Attendance of specific month
+Route: /ViewAttendance/:id/SpecificMonth
+Request type:GET
+Request body: {
+ "month":"december"
+}
+Parameters: User id “ac-1” or “hr-1”
+Example of how to call the route: /ViewAttendance/ac-14/SpecificMonth
+Response:
+[
+    {
+        "_id": "5fe604db19e66c1b4c302658",
+        "member_id": "hr-18",
+        "Days": [
+            {
+                "Signin": "Signed in",
+                "SignOut": "Signed Out",
+                "MinutesSpent": 0,
+                "_id": "5fe604db19e66c1b4c302659",
+                "day": 25,
+                "dayname": 5,
+                "month": 11,
+                "year": 2020,
+                "fulldate": "2020-12-25T20:37:10.776Z"
+            }
+        ],
+        "__v": 0
+    }
+]
+
+•	Functionality:View Missing Days
+Route: /ViewMissingDay
+Request type: GET
+Parameters: User id “ac-1” or “hr-1”
+Example of how to call the route: /ViewMissingDays/hr-18
+Response: [
+    "10/11/2020",
+    "11/11/2020",
+    "12/11/2020",
+    "13/11/2020",
+    "14/11/2020",
+    "15/11/2020",
+    "16/11/2020"]
+•	Functionality:
+Route: /HR/:id/addlocation
+Request type:POST
+Request body: 
+Type options:["lab","tut_room","hall","office"]
+{"room":"name",
+        "type":"lab",
+    "capacity":23
+}
+Parameters: HR id example 18
+Example of how to call the route: /HR/18/addlocation
+Response: if location added successfully “Location added”
+•	Functionality:
+Route: /HR/:id/updatelocation
+Request type:POST
+Request body: if capacity needs to be updated then
+{"room":"name",
+    "capacity":25
+}
+If type 
+{"room":"name",
+    "type":"hall"
+}
+
+Parameters: HR id example 18
+Example of how to call the route: /HR/18/updatelocation
+Response: if location  room found then “Location Updated”
+•	Functionality:Delete Location
+Route: /HR/:id/deletelocation
+Request type:POST
+Request body: {"room":"name"}
+Parameters: HR id example 18
+Example of how to call the route: /HR/18/deletelocation
+Response: if location room found “deleted Successfully”
+
+
+
+
+
+
+
+•	Functionality:View Attendance record of certain staff
+Route: /HR/:id/ViewAttendance
+Request type:GET
+Request body: {"member_id":"ac-25}
+Parameters: HR id example 18
+Example of how to call the route: HR/18/viewattendance
+Response: [
+    {
+        "_id": "5fe6052a19e66c1b4c302660",
+        "member_id": "ac-25",
+        "Days": [
+            {
+                "Signin": "Signed in",
+                "SignOut": "Signed Out",
+                "MinutesSpent": 0,
+                "HoursSpent": 0,
+                "_id": "5fe6052a19e66c1b4c302661",
+                "day": 25,
+                "dayname": 5,
+                "month": 11,
+                "year": 2020,
+                "fulldate": "2020-12-25T21:05:45.236Z"
+            }
+        ],
+        "__v": 0
+    }]
+
+•	Functionality:Add member
+Route: HR/:id/addmember
+Request type:POST
+Request body: {"name":"newmember" ,"email":"new" ,"salary":123,"office":"C7.203"
+}
+
+Parameters: HR id example 18
+Example of how to call the route: HR/18/addmember
+Response: if info was complete and correct “Member added”
+
+
+
+
+
+
+
+•	Functionality:Update Salary
+Route: HR/:id/updateSalary
+Request type:POST
+Request body: {"staffID":"ac-25","newSalary": 2300}
+
+Parameters: HR id example 18
+Example of how to call the route: /HR/18/updatesalary
+Response: if member found 
+"salary updated"
+•	Functionality:Delete staff member
+Route: HR/:id/deleteStaff
+Request type:POST
+Request body: {"staffID":"ac-25"}
+Parameters: HR id example 18
+
+Example of how to call the route: /HR/18/deleteStaff
+Response: if member found "staff deleted"
+•	Functionality:View slot linking request
+Route: CC/:id/SlotlinkingRequests
+Request type:GET
+Parameters: CC id example 16
+Example of how to call the route: /CC/18/Slotlinkingrequests
+Response: {
+course_name: 'none',
+_id: 3,
+member_id: 25,
+type: 'slotLinking',
+state: 'rejected',
+department: 'iet',
+request_day: 2020-12-23T20:45:09.150Z,
+reciever_id: 123,
+slot: 'sunday2nd',
+__v: 0
+}
+
+•	Functionality:Accept slot linking request
+Route: CC/:id/ AcceptLinkingRequest
+Request type: POST
+Request body: 
+{
+“reqid”:0}
+
+Parameters: CC id example 16
+
+Example of how to call the route: CC/0/ AcceptLinkingRequest
+Response: if request id valid “request accept”
+
+•	Functionality: Reject Slot linking request
+Route: CC/:id/RejectLikingRequest
+Request type: POST
+Request body: {
+“reqid”:0}
+
+Parameters: CC id example 16
+Example of how to call the route: CC/0/ RejectLikingRequest
+Response: if request id valid “request rejected”
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Functionality: HOD assign a course instructor
+Route: /HOD/:id/assignCI
+Route example: /HOD/123/assignCI
+Request type: post
+Parameters: id is the HOD’s id
+Request body: {"id2":123456,"courseName":"networks"}
+Response: (if both id2 and courseName belong to the department of the HOD) "CI assigned"
+(if id2/courseName doesn’t belong to the department of HOD)
+"this course/staff doesnt belong to this department  "
+……………………………………………………………………………………………………………………………………………………………
+Functionality: HOD delete a course instructor
+Route: /HOD/:id/deleteCI
+Route example: /HOD/123/deleteCI
+Request type: post
+Parameters: id is the HOD’s id
+Request body: {"id2":123456,"courseName":"networks"}
+Response: (if given id2 not a CI or not CI of the give courseName or course doesn’t belong to his department) "(this course/staff doesnt belong to this department)/course reached min no of CI's  "
+(if the given request is valid)
+"CI deleted"
+………………………………….
+Functionality: HOD update CI
+Route: /HOD/:id/updateCI
+Route example: /HOD/123/updateCI
+Request type: post
+Parameters: id is the HOD’s id
+Request body: { "id2":12345,"course1":"chemistry","course2":"networks"}
+Response: (if given id2 correctly and id2 is a CI of course1, course1 belong to department, course2 belong to the department) "CI updated"
+Other responses: "given id is not CI of the given course"
+id2 is not CI of course1 .
+"(this course/staff doesnt belong to this department)/course reached min no of CI's  "
+Requested course or staff doesn’t belong to same department as the HOD or course1 have only id2 as his only course instructor.
+"cant access this page/ enter missing fields"
+Not a HOD, or not all required fields were entered
+……………………………………………
+Functionality: HOD view staff in his department
+Route: /HOD/:id/viewstaffdep
+Request type: get
+Parameters: id is the HOD’s id
+Response: array of academic members
+Example of a single staff:
+[
+    {
+        "password": "1999",
+        "courses": [
+            "csen203"
+        ],
+        "_id": 17777,
+        "Name": "Samar",
+        "gender": "male",
+        "email": "samar@guc.com",
+        "salary": 1000,
+        "faculty": null,
+        "department": "met",
+        "TA": true,
+        "CI": false,
+        "CC": true,
+        "HOD": true,
+        "day_off": "sunday",
+        "schedule": [
+            {
+                "_id": "5fdca719a3ec4d017853410f",
+                "day_slot": "mond2nd",
+                "course": "csen203"
+            }
+        ],
+        "slot": {
+            "name": 2,
+            "count": 4
+        },
+        "createdAt": "2020-12-18T12:56:57.577Z",
+        "updatedAt": "2020-12-18T12:56:57.577Z",
+        "__v": 0
+    }
+]
+
+ In case you are not a HOD: "cant access this page"
+…………………………………………………………………
+Functionality: HOD view staff in department per course
+Route: /HOD/:id/:courses
+Route example: /HOD/123/networks
+Request type: get
+Parameters: id is the HOD’s id, courses is the name of course the HOD want to view staff in 
+Response: if found a staff from the HOD’s department in the given course will return array of academic members 
+[
+    {
+        "password": "1234",
+        "courses": [
+            "physics203",
+            "networks",
+            "maths"
+        ],
+        "_id": 12345,
+        "Name": "Omar",
+        "gender": "male",
+        "email": "omara@guc.com",
+        "salary": 1000,
+        "faculty": null,
+        "department": "met",
+        "TA": true,
+        "CI": true,
+        "CC": false,
+        "HOD": false,
+        "day_off": "monday",
+        "schedule": [
+            {
+                "_id": "5fdca78af9ae683628334f87",
+                "day_slot": "sunday2nd",
+                "course": "physics203"
+            }
+        ],
+        "slot": {
+            "name": 2,
+            "count": 4
+        },
+        "__v": 0
+    }
+]
+
+If there is no staff found from the HOD’s department  in this course
+"No staff found in this course"
+………………………………………………………………
+Functionality: HOD view day off of all staff in department
+Route: /HOD/:id/dayoff
+Route example: /HOD/123/dayoff
+Request type: get
+Parameters: id is the HOD’s dayoff
+Response: array of staff member with their id and name and day off
+Example:
+[
+    {
+        "_id": 17777,
+        "Name": "Samar",
+        "day_off": "sunday"
+    }
+]
+………………………………………………………………………………………………………………………………………………………………
+Functionality: view day off of a certain staff member 
+Route: /HOD/:id/dayoff/:id2
+Request type: get
+Route example: /HOD/123/983
+Parameters: id is the HOD’s id, id2 is the staff member the HOD want to view his day off
+Response: return array of the staff member along with his name and id and day off
+Example
+[
+    {
+        "_id": 1234,
+        "Name": "Ahmed",
+        "day_off": "saturday"
+    }
+]
+If id2 is not in the same department as the HOD’s department
+"this staff is not in your department"
+………………………………………………………
+
+Functionality: HOD view change day off requests in his department
+Route: /HOD/:id/viewrequests/allstaffdayoff
+Route example: /HOD/123/viewrequests/allstaffdayoff
+Request type: get
+Parameters: id is HOD’s id
+Response: array of change day off requests
+Example: {
+{
+_id: 7,
+member_id: 123456,
+type: 'dayOff',
+state: 'accepted',
+course_name: 'circuits203',
+__v: 0
+}
+………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………………
+
+Functionality: HOD view all leave requests for staff in his department
+Route: /HOD/:id/viewrequests/allstaffleave
+Example Route: /HOD/123/viewrequests/allstaffleave
+Type: get
+Parameters: id is HOD’s id
+Response: array of all leave requests in his department
+Example:
+{
+_id: 7,
+member_id: 123456,
+type: 'sick-leave',
+state: 'accepted',
+course_name: 'circuits203',
+__v: 0
+}
+……………………………………………………………………………………………………………………………………………………………
+
+Functionality: HOD reject request
+Route: /HOD/:id/rejectRequest
+Route example: /HOD/123/rejectRequest
+Request type: post
+Parameters: id is HOD’s id
+Request body: {"reqId":1}
+
+Response: if the given request id is found and in the HOD’s department
+"request rejected"
+If request id wasn’t found or doesn’t belong to this department
+"cant reject a request for a staff not in your department"
+………………………………………………………………………………………………………………………………………………………………
+Functionality: HOD view coverage of each course in his department
+Route: /HOD/:id/viewCoverage
+Route example: /HOD/123/viewCoverage
+Request type: get
+Parameters: id is HOD’s id
+Response: array of courses
+Example:
+[
+    {
+        "_id": "5fe4f3ffb4b216333803c460",
+        "name": "networks",
+        "department": "met",
+        "coverage": 5,
+        "slot": [
+            {
+                "day_slot": "mond2nd",
+                "assigned": true
+            }
+        ],
+        "CCid": 123456,
+        "__v": 0
+    }
+]
+……………………………………………………………………………………………………………………………………………………………
+
+
+
+Functionality: HR delete a department
+Route: /HR/:id/department/deleteDep
+Route example: /HR/123/department/deleteDep
+Request type: post
+Parameters: id is HR’s id
+Request body: {"deleteDep": "met"}
+Response: "department deleted"
+…………………………………………………………………………………………………………………………………………………………
+
+Functionality: HR delete course
+Route: /HR/:id/course/deleteCourse
+Route example: /HR/123/course/deleteCourse
+Request type: post
+Parameters: id is HR’s id
+Request body: {"course": "math"}
+Response: "cousre deleted from department"
+……………………………………………………………………………………………………………………………………………………………
+Functionality: HR update faculty
+Route: /HR/:id/faculty/upFaculty
+Route example: /HR/123/faculty/upFaculty
+Request type: post
+Parameters: id is HR’s id
+Request body: {"oldFaculty":"iet", "newFaculty":"met"}
+Response: "faculty updated"
+……………………………………………………………………………………………………………………………………………………………
+Functionality: HR update department
+Route: /HR/:id/upDep
+Route example: /HR/123/upDep
+Request type: post
+Parameters: id HR’s id
+Request body: {"department":"met", "newDepartment":"iet"}
+Response: "department updated"
+………………………………………………………………………………………………………………………………………………………………
+Functionality: HR update course
+Route: /HR/:id/upCourse
+Route example: /HR/123/upCourse
+Request type: post
+Parameters: id is HR’s id
+Request body: {"course":"chemistry", "updateCourse":"chemistry2"}
+Response: "course updated"
+……………………………………………………………………………………………………………………………………………………………………………………………………………………
+
+Functionality: CI assign academic member to be a course coordinator
+Route: /CI/:id/assignMem
+Route example: /CI/123/assignMem
+Request type: post
+Parameters: id is the CI’s id
+Request body: {
+    "memId":12345, "courseName":"networks"
+}
+Response: "course coordinator assigned"
+………………………………………………………………………………………………………………………………………………………………
+Functionality: GUC staff member update his profile
+Route: /updateProfile/:id/updateField
+Route example: /updateProfile/ac-123/updateField
+Request type: post
+Parameters: id is the guc member trying to update his profile
+Request body: {"updateField": "email", "newField":"example@guc"}
+Response: "field updated"
+……………………………………………………………………………………………………………………………………………………………
+Functionality: staff member applying for compensation request
+Route: /compensationLeave/:id
+Route example: /compensationLeave/123
+Request type:	post 
+Parameters: id is the staff members applying for request 
+Request body: {"absentDay":"2020,12,19", "reason":"any reason"}
+Response: "Request submitted"
+………………………………………………………………………………………………………………………………………………………………
+Functionality: female staff member applying for maternity leave request
+Route: /maternityLeave/:id
+Route example: /maternityLeave/123
+Parameters: id is the staff member id
+Request body: {"reqdays":"25", "doc":"any reason", "startDate":"2020,4,5"}
+Response: "Request submitted"
+………………………………………………………………………………………………………………………………………………………………
+Functionality: View the coverage of course(s) he/she is assigned to.Route: /CI/:id/coverage
+Request type: GET
+Parameters: id is the ID of the course instructor 
+Example of how to call the route: /CI/1234567/coverage
+Response: Array of courses the course instructor assigned to and their coverage . 
+Example : 
+[
+    {
+        "_id": "CSEN100",
+        "coverage": 5
+    },
+    {
+        "_id": “CSEN200“,
+        "coverage": 7
+    }
+]
+——————————————————————————————-
+
+Functionality: View the slots assignment of course(s) he/she is assigned to.Route: /CI/:id/courseAssignment
+Request type: GET
+Parameters: id is the ID of the course instructor 
+Example of how to call the route: /CI/1777/courseAssignment
+Response: Array of the courses the course instructor assigned to with each course have on his left side the slot and the TA that give this course.
+ Example : 
+[
+    "ac-0 , sunday2nd , csen203",
+    "ac-201 , sunday2nd , csen203",
+    "ac-170 , mond2nd , csen101",
+    "ac-0 , mond3nd , csen101",
+    "ac-171 , mond2nd , csen101",
+  ]
+——————————————————————————————-
+Functionality:View all the staff in his/her department
+Route: /CI/:id/staffDepartment
+Request type: GET
+Parameters: id is the ID of the course instructor 
+Example of how to call the route: /CI/1777/staffDepartment 
+Response: Array of profiles of academic members that is in this course instructor department.
+ Example : [
+    {
+        "password": "password",
+        "courses": [
+            "csen203",
+            "csen101"
+        ],
+        "_id": 1777,
+        "Name": "Samar",
+        "gender": "male",
+        "email": "email",
+        "salary": 11,
+        "faculty": "unassigned",
+        "department": "met",
+        "TA": true,
+        "CI": false,
+        "CC": false,
+        "HOD": false,
+        "schedule": [
+            {
+                "_id": "5fdba566276e794a5874e55f",
+                "day_slot": "mond2nd",
+                "course": "csen203"
+            }
+        ],
+        "createdAt": "2020-12-17T18:37:26.898Z",
+        "updatedAt": "2020-12-19T20:28:18.991Z",
+        "__v": 0
+    }]
+   ——————————————————————————————————————————————————————————-
+Functionality:View all the staff per course along with their profiles 
+Route: /CI/:id/staffPerCourse
+Request type: POST
+Parameters: id is the ID of the course instructor 
+Example of how to call the route: /CI/1777/staffPerCourse
+Request body: { "courses": "csen100" }
+Response: Array of profiles of academic members that give this course
+Example : [
+    {
+        "password": "password",
+        "courses": [
+            "csen203",
+            "csen100"
+        ],
+        "_id": 1777,
+        "Name": "Samar",
+        "gender": "male",
+        "email": "email",
+        "salary": 11,
+        "faculty": "unassigned",
+        "department": "iet",
+        "TA": false,
+        "CI": true,
+        "CC": false,
+        "HOD": false,
+        "schedule": [
+            {
+                "_id": "5fdba566276e794a5874e55f",
+                "day_slot": "mond2nd",
+                "course": "csen203"
+            }
+        ],
+        "__v": 0
+    }
+]
+————————————————————————————————————————————————————————————————
+Functionality:Assign an academic member to an unassigned slots in course(s) he/she is assigned to. 
+Route: /CI/:id/AssignASlot
+Request type: POST
+Parameters: id is the ID of the course instructor 
+Example of how to call the route: /CI/1777/AssignASlot
+Request body: { "course" : "csen100",  "slot": "mond2nd", "assignedMember":"171"}
+Response: if successful will return “assigned" else will return an error messages
+Example: “assigned"
+———————————————————————————————
+Functionality:delete assignment of academic member in course(s) he/she is assigned to. 
+Route: /CI/:id/deleteAssignment
+Request type: POST
+Parameters: id is the ID of the course instructor 
+Example of how to call the route: /CI/1777/deleteAssignment
+Request body:{ "course" : "csen100",  "slot": "mond2nd", "assignedMember":"203"}
+Response: if successful will return "deleted slot" else will return an error messages.
+Example: “"deleted slot"
+———————————————————————————————
+Functionality:update assignment of academic member in course(s) he/she is assigned to. 
+Route: /CI/:id/updateAssignment
+Request type: POST
+Parameters: id is the ID of the course instructor 
+Example of how to call the route:  /CI/1777/updateAssignment
+Request body:{ "course" : "csen100",  "slot": "mond2nd", "assignedMember":"203","newMember":"25"}
+Response: if successful will return "updated" else will return an error messages.
+Example: "updated"
+—————————————————————————————
+
+Functionality:Add course slot(s) in his/her course. 
+Route: /CC/:id/addSlot
+Request type: POST
+Parameters: id is the ID of the course coordinator 
+Example of how to call the route:  /CC/12345/addSlot
+Request body: { "course" : "csen100", “slot":"sun1st"}
+Response: if successful will return "slot added" else will return an error messages.
+Example: "slot added”
+———————————————————————————————
+Functionality:delete course slot(s) in his/her course. 
+Route: /CC/:id/deleteSlot
+Request type: POST
+Parameters: id is the ID of the course coordinator 
+Example of how to call the route:  /CC/12345/deleteSlot
+Request body: { "course" : "csen100", "oldSlot":"sun1st"}
+Response: if successful will return "slot updated" else will return an error messages.
+Example: "slot updated”
+———————————————————————————————
+
+Functionality:update course slot(s) in his/her course. 
+Route: /CC/:id/updateSlot
+Request type: POST
+Parameters: id is the ID of the course coordinator 
+Example of how to call the route:  /CC/12345/updateSlot
+Request body: { "course" : "csen100", "oldSlot":"mond2nd","newSlot":"sun2nd","assigned":"false"}
+Response: if successful will return "slot updated" else will return an error messages.
+Example: "slot updated”
+———————————————————————————————
+
+Functionality: view your extra hours and missing hours and your new salary after  deduction if any
+Route: /missingHours/:id
+Request type: GET
+Parameters: id is the ID of the staff member
+Example of how to call the route: /missingHours/ac-25
+
+Response:will return your salary, your miss hours, your miss mins,extra mins
+Example: "your salary: 5000 , your miss hours: 132 , your miss mins 32 , extra mins 0"
+
+
+All request routes have the same functinailty with different inputs according to each requirements 
+app.use('/AnnualLeaveRequest',require('./Routes/AnnualLeaveRequest'))
+app.use('/AccidentalLeaveRequest',require('./Routes/AccidentalLeaveRequest'))
+app.use('/ChangeDayOff',require('./Routes/ChangeDayOff'))
+app.use('/SlotLinkingRequest',require('./Routes/SlotLinkingRequest'))
+app.use('/SickLeaveRequest',require('./Routes/SickLeave'))
+
+app.use('/ReplacementRequest',require('./Routes/Replacement'))
+example for how to call 
+/ReplacementRequest/:id 
+ Id is “ac-1” or “hr-1” 
+Sorry there was no time to complete functionalities
+
+
+  To launch the server npm start for index.js file
+On port 3000
+Team 48
