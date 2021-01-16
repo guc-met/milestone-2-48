@@ -69,10 +69,10 @@ export default class NavBar extends Component {
         className="d-inline-block align-top"
         alt="Your Profile"
       />
-        <NavDropdown.Item href={this.props.signin}>Sign In</NavDropdown.Item>
-        <NavDropdown.Item href={this.props.signout}>Sign Out</NavDropdown.Item>
-        <NavDropdown.Item href={this.props.reset}>Reset My Password</NavDropdown.Item>
-        <NavDropdown.Item href="/hr" onClick={()=>{sessionStorage.removeItem("loggeduser");
+        <NavDropdown.Item href={sessionStorage.getItem("signin")}>Sign In</NavDropdown.Item>
+        <NavDropdown.Item href={sessionStorage.getItem("signout")}>Sign Out</NavDropdown.Item>
+        <NavDropdown.Item href={sessionStorage.getItem("reset")}>Reset My Password</NavDropdown.Item>
+        <NavDropdown.Item href={sessionStorage.getItem("home")} onClick={()=>{sessionStorage.removeItem("loggeduser");
           sessionStorage.removeItem("token");}}>Log Out</NavDropdown.Item>
       </NavDropdown>
    
