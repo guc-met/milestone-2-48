@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import NavBarStaff from './NavBarStaff.js'
+import NavBar from './NavBar.js'
 import axios from "axios";
 import './styles.css';
 import './styleProfile.css';
@@ -20,7 +20,7 @@ export default class about extends Component {
       return(
         <div className="omar">
         < div className="table"  >
-        <NavBarStaff />
+        <NavBar />
         
         < div class="container emp-profile"  >
     
